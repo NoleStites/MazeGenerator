@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "4z8t8LAV+tY=",
+  "success": true,
+  "projectFilePath": "/home/nole-stites/Desktop/MazeGenerator/server/server.csproj",
+  "expectedPackageFiles": [
+    "/home/nole-stites/.nuget/packages/microsoft.aspnetcore.openapi/9.0.7/microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
+    "/home/nole-stites/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
