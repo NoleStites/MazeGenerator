@@ -1,11 +1,17 @@
 .mazeContainerTable {
-    width: 800px;
     aspect-ratio: 1/1;
     margin-top: 10px;
+    box-sizing: border-box;
 }
 
 .mazeContainerTable > table {
-    width: 100%;
-    height: 100%;
+    background-color: white;
     border-collapse: collapse;
+    box-sizing: border-box;
+    border-spacing: 0;
+}
+
+.mazeCellTable {
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
 }
