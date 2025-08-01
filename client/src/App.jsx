@@ -37,7 +37,7 @@ function App() {
   }, [generate, width, height]);
 
   function resetMazeBorders() {
-    const cells = document.querySelectorAll(`.${styles.mazeCellTable}`);
+    const cells = document.querySelectorAll('td'); // Select all table cells
     cells.forEach(cell => {
       cell.style.border = `${mazeWallWidth}px solid transparent`; // Reset all borders
     });
