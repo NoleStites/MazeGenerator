@@ -39,14 +39,15 @@ app.MapControllers();
 app.MapGet("/initializeMaze", (int width, int height) =>
 {
     // Initialize a 2D rectangular array of Node objects
-    Node[][] maze = new Node[width][];
-    String[][] coords = new String[width][];
+    Node[][] maze = new Node[height][];
+    String[][] coords = new String[height][];
 
-    for (int x = 0; x < width; x++)
+    // for (int x = 0; x < width; x++)
+    for (int x = 0; x < height; x++)
     {
-        maze[x] = new Node[height];
-        coords[x] = new String[height];
-        for (int y = 0; y < height; y++)
+        maze[x] = new Node[width];
+        coords[x] = new String[width];
+        for (int y = 0; y < width; y++)
         {
             var newNode = new Node(x, y);
             var newCoord = $"{x},{y}";
@@ -72,18 +73,18 @@ app.MapGet("/initializeMaze", (int width, int height) =>
     visitNode(maze[0][0]);
 
     // Print the visited neighbors for debugging
-    for (int x = 0; x < width; x++)
-    {
-        for (int y = 0; y < height; y++)
-        {
-            Node currentNode = maze[x][y];
-            Console.WriteLine($"Node at ({currentNode.coordX}, {currentNode.coordY}) has visited neighbors: {currentNode.visitedNeighbors.Count}");
-            foreach (var neighbor in currentNode.visitedNeighbors)
-            {
-                Console.WriteLine($"  Neighbor at ({neighbor.coordX}, {neighbor.coordY})");
-            }
-        }
-    }
+    // for (int x = 0; x < height; x++)
+    // {
+    //     for (int y = 0; y < width; y++)
+    //     {
+    //         Node currentNode = maze[x][y];
+    //         Console.WriteLine($"Node at ({currentNode.coordX}, {currentNode.coordY}) has visited neighbors: {currentNode.visitedNeighbors.Count}");
+    //         foreach (var neighbor in currentNode.visitedNeighbors)
+    //         {
+    //             Console.WriteLine($"  Neighbor at ({neighbor.coordX}, {neighbor.coordY})");
+    //         }
+    //     }
+    // }
 
     // Determine where maze borders need to go to fit path
     var borderDirections = determineBorderDirections(maze);
@@ -134,10 +135,8 @@ List<string>[][] determineBorderDirections(Node[][] maze)
 
             // Determine direction of each neighbor node and remove border in that direction
             for (int i = 0; i < currentNode.visitedNeighbors.Count; i++)
-            // for (int i = 0; i < currentNode.neighbors.Count; i++)
             {
                 Node neighbor = currentNode.visitedNeighbors[i];
-                // Node neighbor = currentNode.neighbors[i];
                 // Console.WriteLine($"Neighbor at ({neighbor.coordX}, {neighbor.coordY})");
                 if (neighbor.coordY < currentNode.coordY) // Neighbor is to the left
                 {

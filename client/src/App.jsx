@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import styles from './Maze.module.css';
 
 function App() {
-  const [width, setWidth] = useState(5); // Width of the maze in cells
-  const [height, setHeight] = useState(3); // Height of the maze in cells
+  const [width, setWidth] = useState(9); // Width of the maze in cells
+  const [height, setHeight] = useState(9); // Height of the maze in cells
   const [mazeWallWidth, setMazeWallWidth] = useState(10); // Wall width in pixels
   const [mazeCellSize, setMazeCellSize] = useState(80); // Cell size in pixels
   const [mazeData, setMazeData] = useState(null); // Store the maze data fetched from the server
@@ -49,8 +49,8 @@ function App() {
     // Define border styles
     let borderStyle = `${borderWidth}px solid black`;
 
-    for (let i = 0; i < width; i++) {
-      for (let j = 0; j < height; j++) {
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
         // console.log(mazeData[i][j]);
         const cell = document.getElementById(`cell-${i}-${j}`);
 
@@ -128,7 +128,7 @@ function App() {
             type="number"
             value={mazeCellSize}
             onChange={(e) => setMazeCellSize(Number(e.target.value))}
-            min="30"
+            min="15"
             max="200"
             step="10"
           />
@@ -158,7 +158,6 @@ function Maze({ width, height, wallWidth, cellSize }) {
           key={`cell-${i}-${j}`}
           className={styles.mazeCellTable}
           id={`cell-${i}-${j}`}
-          // id={`cell-${j}-${i}`}
           style={{ borderWidth: `${wallWidth}px`, width: `${cellSize}px`, height: `${cellSize}px`, boxSizing: 'border-box'}}
         />
       );
