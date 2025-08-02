@@ -25,7 +25,7 @@ function App() {
         const text = await res.text();
         const json = JSON.parse(text);
         setMazeData(json); // store the maze data
-        // console.log('Maze data:', json);
+        console.log('Maze data:', json);
         createMazeBorders(width, height, mazeWallWidth, json);
       } catch (err) {
         console.error('Failed to fetch maze:', err);
@@ -88,60 +88,77 @@ function App() {
   };
 
   return (
-    <>
-      <h1>Maze Generator</h1>
-      <button onClick={handleGeneratePath}>Generate Path</button>
-      <div className={styles.mazeControls}>
-        <label>
-          Width:
-          <input
-            type="number"
-            value={width}
-            onChange={(e) => setWidth(Number(e.target.value))}
-            min="2"
-            max="20"
-          />
-        </label>
-        <label>
-          Height:
-          <input
-            type="number"
-            value={height}
-            onChange={(e) => setHeight(Number(e.target.value))}
-            min="2"
-            max="20"
-          />
-        </label>
-        <label>
-          Wall Width (px):
-          <input
-            type="number"
-            value={mazeWallWidth}
-            onChange={(e) => setMazeWallWidth(Number(e.target.value))}
-            min="1"
-            max="20"
-          />
-        </label>
-        <label>
-          Cell Size (px):
-          <input
-            type="number"
-            value={mazeCellSize}
-            onChange={(e) => setMazeCellSize(Number(e.target.value))}
-            min="15"
-            max="200"
-            step="10"
-          />
-        </label>
+    <div className={styles.app}>
+      <div className={styles.content}>
+        <div className={styles.pageLeft}>
+          <div className={styles.card}><h1>Maze Generator</h1></div>
+          <div className={styles.card}>
+            <div className={styles.mazeControls}>
+              <label>
+                Width:
+                <input
+                  type="number"
+                  value={width}
+                  onChange={(e) => {
+                    setWidth(Number(e.target.value));
+                    handleGeneratePath(); // regenerate maze on width change
+                  }}
+                  min="2"
+                  max="50"
+                />
+              </label>
+              <label>
+                Height:
+                <input
+                  type="number"
+                  value={height}
+                  onChange={(e) => {
+                    setHeight(Number(e.target.value));
+                    handleGeneratePath(); // regenerate maze on width change
+                  }}
+                  min="2"
+                  max="50"
+                />
+              </label>
+              <label>
+                Wall Width (px):
+                <input
+                  type="number"
+                  value={mazeWallWidth}
+                  onChange={(e) => setMazeWallWidth(Number(e.target.value))}
+                  min="1"
+                  max="20"
+                />
+              </label>
+              <label>
+                Cell Size (px):
+                <input
+                  type="number"
+                  value={mazeCellSize}
+                  onChange={(e) => setMazeCellSize(Number(e.target.value))}
+                  min="15"
+                  max="200"
+                  step="10"
+                />
+              </label>
+            </div>
+            <button className={styles.generateButton} onClick={handleGeneratePath}>Generate</button>
+          </div>
+        </div>
+        <div className={styles.pageRight}>
+          <div className={`${styles.mazeContainerTable} ${styles.card}`}>
+              <table>
+                  <tbody>
+                      <Maze width={width} height={height} wallWidth={mazeWallWidth} cellSize={mazeCellSize} />
+                  </tbody>
+              </table>
+          </div>
+        </div>
       </div>
-      <div className={styles.mazeContainerTable}>
-          <table>
-              <tbody>
-                  <Maze width={width} height={height} wallWidth={mazeWallWidth} cellSize={mazeCellSize} />
-              </tbody>
-          </table>
-      </div>
-    </>
+      <footer className={styles.footer}>
+        &copy; {new Date().getFullYear()} Nole Stites. All rights reserved.
+      </footer>
+    </div>
   )
 }
 
